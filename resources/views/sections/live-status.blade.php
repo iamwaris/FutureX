@@ -17,17 +17,20 @@
         style="border-radius: var(--radius-base); box-shadow: var(--shadow-elevation);"
     >
         <div class="flex items-start gap-4">
-            <span class="relative mt-1.5 flex h-3 w-3 shrink-0">
-                @if ($isLive)
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-error opacity-75"></span>
-                @endif
-                <span class="relative inline-flex h-3 w-3 rounded-full {{ $isLive ? 'bg-error' : 'bg-text-muted' }}"></span>
-            </span>
+            <x-platform-badge name="twitch" />
 
             <div>
-                <p class="font-heading text-2xl font-semibold text-text-primary">
-                    {{ $isLive ? 'LIVE NOW' : 'Currently Offline' }}
-                </p>
+                <div class="flex items-center gap-2">
+                    <span class="relative flex h-2.5 w-2.5 shrink-0">
+                        @if ($isLive)
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-error opacity-75"></span>
+                        @endif
+                        <span class="relative inline-flex h-2.5 w-2.5 rounded-full {{ $isLive ? 'bg-error' : 'bg-text-muted' }}"></span>
+                    </span>
+                    <p class="font-heading text-2xl font-semibold text-text-primary">
+                        {{ $isLive ? 'LIVE NOW' : 'Currently Offline' }}
+                    </p>
+                </div>
                 <p class="mt-1 font-body text-text-secondary">
                     {{ $stream['title'] }}
                 </p>

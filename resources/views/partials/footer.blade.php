@@ -1,11 +1,11 @@
 @php
     $socialLinks = [
-        ['label' => 'Twitch', 'href' => '#'],
-        ['label' => 'YouTube', 'href' => '#'],
-        ['label' => 'Discord', 'href' => '#'],
-        ['label' => 'X', 'href' => '#'],
-        ['label' => 'Instagram', 'href' => '#'],
-        ['label' => 'TikTok', 'href' => '#'],
+        ['name' => 'twitch', 'label' => 'Twitch', 'href' => '#'],
+        ['name' => 'youtube', 'label' => 'YouTube', 'href' => '#'],
+        ['name' => 'discord', 'label' => 'Discord', 'href' => '#'],
+        ['name' => 'x', 'label' => 'X', 'href' => '#'],
+        ['name' => 'instagram', 'label' => 'Instagram', 'href' => '#'],
+        ['name' => 'tiktok', 'label' => 'TikTok', 'href' => '#'],
     ];
 @endphp
 
@@ -19,12 +19,13 @@
                 </p>
             </div>
 
-            <div class="flex flex-wrap gap-x-8 gap-y-4">
+            <div class="flex flex-wrap gap-x-6 gap-y-4">
                 @foreach ($socialLinks as $link)
                     <a
                         href="{{ $link['href'] }}"
-                        class="font-body text-sm text-text-secondary transition hover:text-text-primary"
+                        class="flex items-center gap-2 font-body text-sm text-text-secondary transition hover:text-text-primary"
                     >
+                        <x-platform-badge :name="$link['name']" size="sm" />
                         {{ $link['label'] }}
                     </a>
                 @endforeach

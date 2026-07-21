@@ -16,6 +16,20 @@
                 consistency, community, and a genuine love for the craft. Every stream, video, and
                 collaboration is built around one mission: make this a place people want to belong to.
             </p>
+
+            <div class="mt-8 grid grid-cols-3 gap-3">
+                @for ($i = 0; $i < 3; $i++)
+                    <div
+                        class="relative flex aspect-square items-center justify-center overflow-hidden border border-border"
+                        style="border-radius: var(--radius-base); background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); opacity: 0.85;"
+                    >
+                        <x-ui-icon name="camera" solid class="h-6 w-6 text-white/70" />
+                    </div>
+                @endfor
+            </div>
+            <a href="#" class="mt-3 flex items-center gap-1 font-body text-sm text-text-secondary hover:text-text-primary">
+                View full gallery <x-ui-icon name="arrow-right" class="h-4 w-4" />
+            </a>
         </div>
 
         <ol class="relative border-l border-border pl-8">
