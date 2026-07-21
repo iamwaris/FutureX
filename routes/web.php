@@ -4,6 +4,7 @@ use App\Models\MediaKit;
 use App\Models\PageSection;
 use App\Models\SnapshotStat;
 use App\Models\Sponsor;
+use App\Services\Shop\ShopManager;
 use App\Services\ThemeService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
@@ -57,3 +58,9 @@ Route::get('/gallery', function () {
 Route::get('/events', function () {
     return view('events');
 })->name('events');
+
+Route::get('/shop', function (ShopManager $shop) {
+    return view('shop', [
+        'products' => $shop->products(),
+    ]);
+})->name('shop');

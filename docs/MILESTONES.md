@@ -104,13 +104,15 @@ Highest monetization priority — brands should be able to self-serve everything
 
 ---
 
-## M8 — Shop Integrations
+## M8 — Shop Integrations ✅ DONE
 
-- `ShopProvider` interface with adapters for Shopify, Fourthwall, WooCommerce, Gumroad, Spring.
-- Admin picks the active provider(s) and credentials in Filament Integrations.
-- Shop section + `/shop` page: featured products, limited drops, digital downloads, pulling live data from the active provider's API where possible (fallback to manually curated products otherwise).
+- `ShopProvider` interface with adapters for Shopify (Storefront GraphQL API), Fourthwall (public Storefront API), WooCommerce (REST API, Basic Auth), Gumroad (API, always digital), and Spring (best-effort — Spring doesn't publish a simple public read API the way the others do; real integration needs an approved partner application, flagged clearly in the code, same as the Twitch-follower-sync caveat from M5).
+- `ShopCredential` model + Filament resource (`/admin/shop-credentials`, Integrations group) — admin activates exactly one provider at a time via a "Make Active" action; `activate()` deactivates every other row in the same transaction.
+- `Product` model + Filament resource (`/admin/products`, Content group) for manually curated fallback products — featured/limited-drop/digital-download flags, image upload.
+- `ShopManager` resolves the active provider, fetches + caches its products for 10 minutes, and falls back to manually curated `Product` rows when no provider is active or the API returns nothing. Cache invalidates automatically when a `Product` or `ShopCredential` is saved/deleted (a real gap caught mid-build: `forgetCache()` existed but was never wired to model events, so an admin edit wouldn't show up on `/shop` for up to 10 minutes).
+- Homepage Shop section and a new dedicated `/shop` page both pull from `ShopManager`.
 
-**Exit criteria:** switching the active shop provider in Filament changes what renders on `/shop` without code changes.
+**Exit criteria — verified with a real test** (`ShopManagerTest::test_switching_the_active_provider_changes_the_rendered_products`): starts with manual fallback products showing, activates Gumroad and confirms Gumroad's product now renders, then activates WooCommerce and confirms the output changes again — all via `ShopCredential::activate()`, the same Filament action an admin would click, no code changes. 62 tests passing total.
 
 ---
 

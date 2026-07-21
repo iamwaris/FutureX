@@ -33,6 +33,8 @@ class AdminResourcesTest extends TestCase
             ['community-links'],
             ['sponsors'],
             ['business-inquiries'],
+            ['shop-credentials'],
+            ['products'],
         ];
     }
 

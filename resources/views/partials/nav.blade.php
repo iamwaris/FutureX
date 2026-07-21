@@ -6,7 +6,7 @@
         ['label' => 'Schedule', 'href' => '#schedule'],
         ['label' => 'Community', 'href' => '#community'],
         ['label' => 'Sponsors', 'href' => route('sponsors')],
-        ['label' => 'Shop', 'href' => '#shop'],
+        ['label' => 'Shop', 'href' => route('shop')],
         ['label' => 'Contact', 'href' => route('contact')],
     ];
 @endphp
