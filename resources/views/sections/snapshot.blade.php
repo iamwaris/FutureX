@@ -1,11 +1,13 @@
 @php
+    $snapshot = \App\Models\SnapshotStat::current();
+
     $stats = [
-        ['label' => 'Followers', 'value' => 128400, 'icon' => 'users'],
-        ['label' => 'Subscribers', 'value' => 4200, 'icon' => 'sparkles'],
-        ['label' => 'Total Views', 'value' => 18500000, 'icon' => 'eye'],
-        ['label' => 'Years Creating', 'value' => 6, 'icon' => 'calendar'],
-        ['label' => 'Videos Published', 'value' => 940, 'icon' => 'video'],
-        ['label' => 'Community Members', 'value' => 15200, 'icon' => 'users'],
+        ['label' => 'Followers', 'value' => $snapshot->followers, 'icon' => 'users'],
+        ['label' => 'Subscribers', 'value' => $snapshot->subscribers, 'icon' => 'sparkles'],
+        ['label' => 'Total Views', 'value' => $snapshot->total_views, 'icon' => 'eye'],
+        ['label' => 'Years Creating', 'value' => $snapshot->years_creating, 'icon' => 'calendar'],
+        ['label' => 'Videos Published', 'value' => $snapshot->videos_published, 'icon' => 'video'],
+        ['label' => 'Community Members', 'value' => $snapshot->community_members, 'icon' => 'users'],
     ];
 @endphp
 

@@ -9,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('live-status:poll')->everyTwoMinutes()->withoutOverlapping();
+Schedule::command('snapshot-stats:sync')->daily()->withoutOverlapping();

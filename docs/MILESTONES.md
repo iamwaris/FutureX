@@ -67,14 +67,14 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 
 ---
 
-## M5 — Creator Snapshot, Stats & Community Hub
+## M5 — Creator Snapshot, Stats & Community Hub ✅ DONE
 
-- Snapshot stats (followers/subs/views/years/videos/community) — manual entry fields in Filament, with optional scheduled API sync for YouTube/Twitch where available.
-- Animated counter component (count-up on scroll-into-view).
-- Community Hub cards: Discord (widget or manual member count), Reddit, X, Instagram, TikTok, YouTube — each shows a stat, not just an icon.
-- Newsletter capture wired to Beehiiv or Mailchimp (admin picks provider + API key in Filament Integrations).
+- `SnapshotStat` singleton (same pattern as `ThemeSetting`) + Filament settings page (`/admin/snapshot-stats-settings`): followers/subscribers/total_views/years_creating/videos_published/community_members, each with an optional auto-sync toggle.
+- `snapshot-stats:sync` command (scheduled daily) pulls subscribers/total_views/videos_published from YouTube Data API v3 when enabled. Twitch follower auto-sync is intentionally *not* implemented yet — it needs user OAuth (`moderator:read:followers`), not the app access token this project uses for live-status polling; the command warns clearly rather than faking a number.
+- `CommunityLink` model + Filament resource (reorderable, `is_primary` flag for the spotlight card) replaces the hardcoded Discord-is-always-primary array from M2.
+- `NewsletterSetting` singleton + Filament settings page under Integrations, `BeehiivService`/`MailchimpService` behind a `NewsletterManager`, and a `NewsletterForm` Livewire component replacing the client-side-only stub form from M2 — real subscribe API calls, with validation and success/error states.
 
-**Exit criteria:** snapshot numbers and community stats are editable from Filament and animate correctly on the live homepage.
+**Exit criteria — verified with real tests** (`SnapshotAndCommunityTest`, `SnapshotStatsSyncTest`, `NewsletterTest`): homepage reflects `SnapshotStat`/`CommunityLink` DB values, the sync command correctly pulls only the fields with auto-sync enabled via `Http::fake()`, and the newsletter form correctly calls Beehiiv/Mailchimp and shows success/validation states. 30 tests passing total.
 
 ---
 

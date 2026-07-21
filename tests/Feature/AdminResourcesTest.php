@@ -30,13 +30,26 @@ class AdminResourcesTest extends TestCase
             ['faq-items'],
             ['posts'],
             ['streaming-credentials'],
+            ['community-links'],
         ];
     }
 
-    public function test_theme_builder_page_loads(): void
+    /**
+     * @dataProvider settingsPagePaths
+     */
+    public function test_settings_page_loads(string $path): void
     {
         $this->actingAs(User::factory()->create())
-            ->get('/admin/theme-builder')
+            ->get("/admin/{$path}")
             ->assertOk();
+    }
+
+    public static function settingsPagePaths(): array
+    {
+        return [
+            ['theme-builder'],
+            ['snapshot-stats-settings'],
+            ['newsletter-settings-page'],
+        ];
     }
 }

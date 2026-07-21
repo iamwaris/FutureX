@@ -15,24 +15,6 @@
             your inbox, no spam.
         </p>
 
-        <form class="flex w-full max-w-md flex-col gap-3 sm:flex-row" onsubmit="return false;">
-            <label for="newsletter-email" class="sr-only">Email address</label>
-            <input
-                id="newsletter-email"
-                type="email"
-                required
-                placeholder="you@example.com"
-                class="w-full flex-1 border bg-background px-4 py-3 font-body text-text-primary placeholder:text-text-muted focus:outline-none"
-                style="border-radius: var(--radius-base); border-color: color-mix(in srgb, var(--color-border) 70%, transparent);"
-            >
-            <button
-                type="submit"
-                data-magnetic
-                class="bg-primary px-6 py-3 font-body font-semibold text-white transition hover:-translate-y-0.5"
-                style="border-radius: var(--radius-base);"
-            >
-                Subscribe
-            </button>
-        </form>
+        @livewire('newsletter-form')
     </div>
 </x-section>

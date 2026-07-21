@@ -77,6 +77,28 @@ class YouTubeLiveService implements LiveStatusProvider
         return $response->json('items.0');
     }
 
+    /**
+     * Channel-level totals for Snapshot stat auto-sync — separate from
+     * fetchStatus() since it's about the channel overall, not a specific
+     * live broadcast.
+     */
+    public function fetchChannelStatistics(): ?array
+    {
+        $credential = $this->credential();
+
+        if (! $credential || ! $this->isConfigured()) {
+            return null;
+        }
+
+        $response = Http::get('https://www.googleapis.com/youtube/v3/channels', [
+            'part' => 'statistics',
+            'id' => $credential->channel_id,
+            'key' => $credential->client_id,
+        ]);
+
+        return $response->json('items.0.statistics');
+    }
+
     private function credential(): ?StreamingCredential
     {
         return StreamingCredential::forPlatform($this->platformKey());
