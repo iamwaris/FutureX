@@ -19,6 +19,12 @@
                 </p>
             </div>
 
+            <div class="flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-text-secondary">
+                <a href="{{ route('gallery') }}" class="hover:text-text-primary">Gallery</a>
+                <a href="{{ route('events') }}" class="hover:text-text-primary">Events</a>
+                <a href="{{ route('media-kit') }}" class="hover:text-text-primary">Media Kit</a>
+            </div>
+
             <div class="flex flex-wrap gap-x-6 gap-y-4">
                 @foreach ($socialLinks as $link)
                     <a

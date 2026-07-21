@@ -92,13 +92,15 @@ Highest monetization priority — brands should be able to self-serve everything
 
 ---
 
-## M7 — Content Library & Gallery
+## M7 — Content Library & Gallery ✅ DONE
 
-- `/content` unified library: videos/clips/shorts/streams with categories, tags, search — Netflix-style grid/carousel browsing.
-- `/gallery`: events/meetups/BTS media grid with lightbox.
-- `/events`: calendar view of streaming events, charity streams, tournament appearances, meet-and-greets.
+- Added a `tags` column to `videos` (M3 had category but no tags) + `TagsInput` in the Filament form.
+- `/content`: `ContentLibrary` Livewire component — type tabs (video/clip/short/vod), category dropdown, debounced title search, all URL-bound (`#[Url]`) so filters survive a refresh/share. Netflix-style card grid, paginated.
+- `/gallery`: `GalleryGrid` Livewire component — category filter, paginated grid, Alpine-driven lightbox (click to view fullsize, `Escape`/click-outside to close). Falls back to a gradient placeholder for items with no uploaded image.
+- `/events`: `EventsCalendar` Livewire component — real month-grid calendar (prev/next navigation, events shown on their actual day) plus an "Upcoming" list below it.
+- Model factories added for `Video`/`GalleryItem`/`Event` (none existed since M3 built these without factories). Nav's "Content" link and the footer (Gallery/Events/Media Kit) now point at these real pages instead of homepage anchors.
 
-**Exit criteria:** all three pages pull from M3's content models, support search/filter, and stay responsive at scale (test with 100+ dummy items).
+**Exit criteria — verified with real tests** (`ContentLibraryTest`, `GalleryTest`, `EventsCalendarTest`): search/type/category filters all confirmed to narrow results correctly, and each page was seeded with 110–120 factory-generated items and confirmed to (a) paginate correctly rather than dumping everything at once and (b) render in under 2 seconds. 52 tests passing total.
 
 ---
 

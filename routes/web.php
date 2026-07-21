@@ -45,3 +45,15 @@ Route::get('/sponsors', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::get('/content', function () {
+    return view('content-library');
+})->name('content-library');
+
+Route::get('/gallery', function () {
+    return view('gallery');
+})->name('gallery');
+
+Route::get('/events', function () {
+    return view('events');
+})->name('events');

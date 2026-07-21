@@ -6,6 +6,7 @@ use App\Filament\Resources\VideoResource\Pages;
 use App\Models\Video;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -58,6 +59,8 @@ class VideoResource extends Resource
                     ->columnSpanFull(),
                 TextInput::make('category')
                     ->maxLength(255),
+                TagsInput::make('tags')
+                    ->columnSpanFull(),
                 DateTimePicker::make('published_at'),
                 Toggle::make('is_pinned')
                     ->label('Pinned'),

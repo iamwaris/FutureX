@@ -2,7 +2,7 @@
     $navLinks = [
         ['label' => 'Home', 'href' => '/'],
         ['label' => 'About', 'href' => '#about'],
-        ['label' => 'Content', 'href' => '#featured-content'],
+        ['label' => 'Content', 'href' => route('content-library')],
         ['label' => 'Schedule', 'href' => '#schedule'],
         ['label' => 'Community', 'href' => '#community'],
         ['label' => 'Sponsors', 'href' => route('sponsors')],
