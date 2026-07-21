@@ -41,14 +41,19 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 
 ---
 
-## M3 — Content Management (Filament Content Manager + Page Builder)
+## M3 — Content Management (Filament Content Manager + Page Builder) ✅ DONE
 
-- Eloquent models + Filament resources: Videos/Clips, Gallery items, Events, FAQ, Blog/News posts.
-- `page_sections` table (section type, order, `is_enabled`, JSON config) driving which homepage sections render and in what order — this is the Page Builder's data model.
-- Filament Page Builder UI: drag-to-reorder, enable/disable toggle, duplicate section.
-- Media library (Spatie Media Library + Filament plugin) for images/video uploads across all content types.
+- Models + Filament resources: `Video` (videos/clips/shorts/VODs), `GalleryItem`, `Event`, `FaqItem`, `Post` (blog).
+- `page_sections` table (key, label, order, is_enabled) driving which homepage sections render and in what order; `home.blade.php` loops over enabled/ordered records via `@includeIf` instead of a hardcoded list.
+- Filament Page Builder (`/admin/page-sections`): drag-to-reorder, inline enable toggle, duplicate action.
+- Spatie Media Library + `filament/spatie-laravel-media-library-plugin` for image uploads (Video thumbnails, GalleryItem images, Post featured images) via `SpatieMediaLibraryFileUpload`.
 
-**Exit criteria:** an admin can disable the Sponsors section, reorder Schedule above Content, and upload a gallery image — all without a deploy.
+**Exit criteria — verified with real feature tests** (`AdminResourcesTest`, `PageBuilderTest`, `GalleryUploadTest`), not manual curl checks. Disabling a section removes it from the homepage, reordering changes render order, gallery image upload works end-to-end.
+
+**Three real bugs found and fixed by writing those tests** (not caught by earlier manual spot-checks):
+- `User` didn't implement Filament's `FilamentUser` contract, so Filament fell back to "allow panel access only when `APP_ENV=local`" — would have locked everyone out of `/admin` the moment this ever ran with `APP_ENV=production`.
+- `ThemeSetting::current()`'s `firstOrCreate()` only inserts `id=1` and relies on DB column defaults for the rest; Eloquent never re-fetches after `create()`, so the very first request ever served against a fresh database crashed in `ThemeService::googleFontsUrl()`. Fixed by refreshing the model after creation.
+- GD PHP extension was disabled, silently breaking image processing (`imageEditor()`, media conversions) — enabled alongside the earlier `intl`/`zip` fixes.
 
 ---
 
