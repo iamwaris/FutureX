@@ -38,7 +38,7 @@
                     Watch Live
                 </a>
                 <a
-                    href="mailto:business@example.com"
+                    href="{{ route('contact') }}"
                     data-magnetic
                     class="border px-6 py-3 font-body font-semibold text-text-primary transition hover:-translate-y-0.5"
                     style="border-radius: var(--radius-base); border-color: color-mix(in srgb, var(--color-border) 70%, transparent);"

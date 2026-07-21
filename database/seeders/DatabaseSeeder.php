@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PageSectionSeeder::class);
         $this->call(CommunityLinkSeeder::class);
         $this->call(SnapshotStatSeeder::class);
+        $this->call(SponsorSeeder::class);
+        $this->call(MediaKitSeeder::class);
     }
 }

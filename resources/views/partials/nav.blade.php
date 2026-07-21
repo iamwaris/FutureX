@@ -5,9 +5,9 @@
         ['label' => 'Content', 'href' => '#featured-content'],
         ['label' => 'Schedule', 'href' => '#schedule'],
         ['label' => 'Community', 'href' => '#community'],
-        ['label' => 'Sponsors', 'href' => '#sponsors'],
+        ['label' => 'Sponsors', 'href' => route('sponsors')],
         ['label' => 'Shop', 'href' => '#shop'],
-        ['label' => 'Contact', 'href' => 'mailto:business@example.com'],
+        ['label' => 'Contact', 'href' => route('contact')],
     ];
 @endphp
 

@@ -31,6 +31,8 @@ class AdminResourcesTest extends TestCase
             ['posts'],
             ['streaming-credentials'],
             ['community-links'],
+            ['sponsors'],
+            ['business-inquiries'],
         ];
     }
 
@@ -50,6 +52,7 @@ class AdminResourcesTest extends TestCase
             ['theme-builder'],
             ['snapshot-stats-settings'],
             ['newsletter-settings-page'],
+            ['media-kit-settings'],
         ];
     }
 }

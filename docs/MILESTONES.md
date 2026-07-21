@@ -78,16 +78,17 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 
 ---
 
-## M6 — Media Kit & Sponsor Pages
+## M6 — Media Kit & Sponsor Pages ✅ DONE
 
 Highest monetization priority — brands should be able to self-serve everything they need here.
 
-- `/media-kit` page: bio, demographics (geo/age/gender/language), avg/peak viewers, monthly impressions, social stats, past sponsors, brand values, past campaigns.
-- Downloadable PDF export of the Media Kit (Browsershot or DomPDF).
-- `/sponsors` page: logo wall, case studies, campaign highlights, testimonials — all Filament-managed.
-- Business Contact form (name, company, email, campaign type, budget, timeline, message, attachment) with validation, spam protection, email notification + DB record for the admin dashboard.
+- `MediaKit` singleton settings (bio, brand values, avg/peak viewers, monthly impressions, age/gender/language/geographic breakdowns as repeater rows) + Filament page. `/media-kit` renders it all with percentage bar charts; pulls followers from `SnapshotStat` and past partnerships from `Sponsor`.
+- Downloadable PDF export via `barryvdh/laravel-dompdf` at `/media-kit/pdf` — a separate, DomPDF-safe template (no flexbox/grid/CSS-variables, which DomPDF can't render) rather than reusing the token-driven layout.
+- `Sponsor` model + Filament resource (logo upload, case study, campaign highlights, testimonial, `is_featured` flag) replaces the hardcoded homepage sponsor list from M2; also powers a new dedicated `/sponsors` page with full case studies and testimonials.
+- `BusinessInquiry` model + Filament resource (admin can mark read/unread, filter). `/contact` page with a `ContactForm` Livewire component: name/company/email/campaign type/budget/timeline/message/attachment, real validation, a honeypot field, and a submission-speed check (both spam signals fail *silently* — the form still shows success — rather than tipping off bots). Successful submissions email a `NewBusinessInquiryNotification`.
+- Nav "Sponsors"/"Contact" and Hero's "Business Inquiries" CTA now point to these real pages instead of the M2-era anchors/mailto stopgaps.
 
-**Exit criteria:** a brand can view live stats, download a PDF media kit, and submit an inquiry that lands in Filament.
+**Exit criteria — verified with real tests** (`MediaKitTest`, `ContactFormTest`): `/media-kit` shows live DB-backed stats and demographics, the PDF downloads with `pdftotext`-verified real content, `/sponsors` lists sponsors with testimonials, and a contact submission creates a `BusinessInquiry` row + fires the notification — while a honeypot-filled or too-fast submission is confirmed to create neither. 40 tests passing total.
 
 ---
 
