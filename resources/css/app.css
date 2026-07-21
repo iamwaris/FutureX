@@ -117,3 +117,38 @@
 .cos-chip:hover {
     border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
 }
+
+/*
+ * Logo-wall marquee (Linear/Vercel/Stripe "trusted by" pattern): an
+ * infinite scrolling track, monochrome logos that colorize on hover,
+ * edges faded via mask so it reads as continuous rather than clipped.
+ * The track content is duplicated once in the Blade view so -50% is
+ * exactly one loop.
+ */
+.cos-marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.cos-marquee-track {
+    animation: cos-marquee 32s linear infinite;
+}
+
+.cos-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes cos-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cos-marquee-track {
+        animation: none;
+    }
+}

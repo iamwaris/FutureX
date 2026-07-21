@@ -108,8 +108,17 @@ function initCounters() {
     counters.forEach((el) => observer.observe(el));
 }
 
+function initMarquees() {
+    if (motionScale() === 0 || prefersReducedMotion()) {
+        document.querySelectorAll('.cos-marquee-track').forEach((el) => {
+            el.style.animationPlayState = 'paused';
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initMagneticButtons();
     initCounters();
+    initMarquees();
 });

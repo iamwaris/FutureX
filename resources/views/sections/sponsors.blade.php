@@ -1,20 +1,21 @@
 @php
-    $sponsors = ['Aurora Gear', 'Nimbus Energy', 'Voidline PC', 'Fabled Apparel', 'Cortex Audio'];
+    $sponsors = ['Aurora Gear', 'Nimbus Energy', 'Voidline PC', 'Fabled Apparel', 'Cortex Audio', 'Halcyon Media'];
 @endphp
 
 <x-section id="sponsors">
     <x-eyebrow icon="tag">Partnerships</x-eyebrow>
     <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Trusted By</h2>
 
-    <div class="mt-10 flex flex-wrap gap-4">
-        @foreach ($sponsors as $sponsor)
-            <span
-                class="cos-chip bg-surface px-5 py-3 font-heading text-lg font-semibold text-text-secondary transition hover:text-text-primary"
-                style="border-radius: var(--radius-base);"
-            >
-                {{ $sponsor }}
-            </span>
-        @endforeach
+    <div class="cos-marquee-mask relative mt-10 overflow-hidden">
+        <div class="cos-marquee-track flex w-max items-center gap-16">
+            @foreach ([...$sponsors, ...$sponsors] as $sponsor)
+                <span
+                    class="shrink-0 font-heading text-2xl font-bold text-text-muted opacity-60 transition duration-300 hover:scale-105 hover:text-text-primary hover:opacity-100 sm:text-3xl"
+                >
+                    {{ $sponsor }}
+                </span>
+            @endforeach
+        </div>
     </div>
 
     <blockquote class="cos-card relative mt-12 p-8">
