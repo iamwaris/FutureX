@@ -4,11 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -45,5 +47,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Without this, Filament falls back to "allow only when APP_ENV=local",
+     * which would silently lock everyone out of /admin the moment this ever
+     * runs with APP_ENV=production. Single-admin site for now — tighten this
+     * (e.g. a role/permission check) once multiple user types exist.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
     }
 }

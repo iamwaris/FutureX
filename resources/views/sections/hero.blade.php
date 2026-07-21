@@ -1,4 +1,4 @@
-<x-section id="hero" class="relative overflow-hidden pb-20">
+<x-section id="hero" class="relative overflow-hidden">
     {{-- Dot-grid + gradient mesh backdrop, all derived from brand tokens. --}}
     <div
         class="pointer-events-none absolute inset-0 -z-20"

@@ -43,7 +43,19 @@ class ThemeSetting extends Model
      */
     public static function current(): self
     {
-        return static::query()->firstOrCreate(['id' => 1]);
+        $instance = static::query()->firstOrCreate(['id' => 1]);
+
+        // firstOrCreate's create() path only inserts the given attributes and
+        // relies on the DB to apply column defaults (font_heading, radius,
+        // etc.) — it never re-fetches, so those columns are null in memory
+        // until refreshed. Without this, the very first request ever served
+        // against a fresh database would crash wherever those defaults are
+        // used (e.g. ThemeService::googleFontsUrl()).
+        if ($instance->wasRecentlyCreated) {
+            $instance->refresh();
+        }
+
+        return $instance;
     }
 
     protected static function booted(): void

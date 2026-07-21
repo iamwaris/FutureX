@@ -20,7 +20,7 @@
         <iframe
             x-ref="preview"
             src="{{ route('home') }}"
-            class="h-[720px] w-full rounded-xl border border-gray-200 dark:border-gray-700"
+            class="h-[85vh] min-h-[900px] w-full rounded-xl border border-gray-200 dark:border-gray-700"
         ></iframe>
     </div>
 </x-filament-panels::page>
