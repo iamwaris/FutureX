@@ -16,7 +16,7 @@
         @else
             <div class="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
                 @foreach ($products as $product)
-                    <a href="{{ $product->productUrl }}" target="_blank" rel="noopener" class="cos-card group overflow-hidden">
+                    <a href="{{ $product->trackedUrl() }}" target="_blank" rel="noopener" class="cos-card group overflow-hidden">
                         <div class="relative flex aspect-square items-center justify-center overflow-hidden bg-surface">
                             @if ($product->imageUrl)
                                 <img src="{{ $product->imageUrl }}" alt="{{ $product->name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">

@@ -18,6 +18,9 @@ class PlatformColors
         'discord' => '#5865F2',
         'reddit' => '#FF4500',
         'x' => '#000000',
+        'patreon' => '#FF424D',
+        'kofi' => '#FF5E5B',
+        'spotify' => '#1DB954',
     ];
 
     public static function hex(string $platform): string

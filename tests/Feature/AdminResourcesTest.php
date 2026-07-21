@@ -57,6 +57,14 @@ class AdminResourcesTest extends TestCase
             ['newsletter-settings-page'],
             ['media-kit-settings'],
             ['mode-switcher'],
+            ['analytics-settings-page'],
         ];
+    }
+
+    public function test_dashboard_loads_with_its_widgets(): void
+    {
+        $this->actingAs(User::factory()->create())
+            ->get('/admin')
+            ->assertOk();
     }
 }

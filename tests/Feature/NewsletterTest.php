@@ -87,4 +87,30 @@ class NewsletterTest extends TestCase
             ->call('subscribe')
             ->assertHasErrors(['email']);
     }
+
+    /**
+     * The Beehiiv/Mailchimp list is the real subscriber list — this local
+     * copy exists only so the admin Newsletter Growth widget has something
+     * to chart without needing that provider's API.
+     */
+    public function test_a_successful_subscription_is_logged_locally_for_the_growth_widget(): void
+    {
+        NewsletterSetting::current()->update([
+            'provider' => 'beehiiv',
+            'api_key' => 'test-key',
+            'list_id' => 'pub_123',
+            'is_enabled' => true,
+        ]);
+
+        Http::fake([
+            'api.beehiiv.com/*' => Http::response(['data' => ['id' => 'sub_123']], 201),
+        ]);
+
+        (new NewsletterManager())->subscribe('fan@example.com');
+
+        $this->assertDatabaseHas('newsletter_subscriptions', [
+            'email' => 'fan@example.com',
+            'provider' => 'beehiiv',
+        ]);
+    }
 }

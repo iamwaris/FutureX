@@ -38,6 +38,9 @@ class CommunityLinkResource extends Resource
                         'youtube' => 'YouTube',
                         'twitch' => 'Twitch',
                         'kick' => 'Kick',
+                        'patreon' => 'Patreon',
+                        'kofi' => 'Ko-fi',
+                        'spotify' => 'Spotify',
                     ])
                     ->required()
                     ->native(false),

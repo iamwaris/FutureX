@@ -10,6 +10,9 @@
         'discord' => ['label' => 'Dc', 'class' => 'bg-[#5865F2] text-white'],
         'reddit' => ['label' => 'Rd', 'class' => 'bg-[#FF4500] text-white'],
         'x' => ['label' => 'X', 'class' => 'bg-black text-white'],
+        'patreon' => ['label' => 'Pt', 'class' => 'bg-[#FF424D] text-white'],
+        'kofi' => ['label' => 'Ko', 'class' => 'bg-[#FF5E5B] text-white'],
+        'spotify' => ['label' => 'Sp', 'class' => 'bg-[#1DB954] text-black'],
     ];
 
     $item = $config[$name] ?? ['label' => '?', 'class' => 'bg-surface text-text-secondary'];

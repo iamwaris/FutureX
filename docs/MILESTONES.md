@@ -126,13 +126,18 @@ Highest monetization priority — brands should be able to self-serve everything
 
 ---
 
-## M10 — Admin Dashboard, Analytics & Remaining Integrations
+## M10 — Admin Dashboard, Analytics & Remaining Integrations ✅ DONE
 
-- Filament dashboard widgets: traffic, live status, recent inquiries, newsletter growth, merch clicks, sponsor requests.
-- Tracking integrations: Google Analytics, Microsoft Clarity, Meta Pixel — injected conditionally based on admin-entered IDs.
-- Patreon, Ko-fi, Spotify cards wired into Community Hub / footer.
+Most of the widgets this milestone asks for ("real site activity") had no underlying data source yet — GA4 lives externally and Beehiiv/Mailchimp hold the real subscriber list, so built lightweight first-party tracking for what the dashboard needed to show:
 
-**Exit criteria:** dashboard reflects real site activity; all three tracking scripts fire only when configured.
+- `PageView` model + `LogPageView` middleware, applied only to real customer-facing routes (not `/admin`, `/theme.css`, or the shop click-redirect) — powers the Traffic stat.
+- `ProductClick` model + a **signed** `/shop/out` redirect route (`ShopProduct::trackedUrl()`) — powers Merch Clicks. Signed deliberately: a bare `?url=` redirect parameter would be an open redirect (anyone could craft a link through our own domain pointing anywhere); tampering with the URL now correctly 403s.
+- `NewsletterSubscription` — a local log written alongside every successful Beehiiv/Mailchimp API call, purely so the Growth widget has something to chart without needing those providers' own APIs.
+- `DashboardStatsOverview` (live status, 7-day traffic, unread inquiries, sponsor-type inquiry count, newsletter growth with a 7-day chart, 7-day merch clicks) and `RecentInquiries` table widget, both auto-discovered by Filament.
+- `AnalyticsSetting` singleton + Filament page under Integrations; a `tracking-scripts` partial conditionally renders GA4/Clarity/Meta Pixel — each script block only appears when its ID is filled in.
+- Patreon/Ko-fi/Spotify added to `PlatformColors`, `<x-platform-badge>`, `CommunityLinkResource`'s platform options, and a new "Support" row in the footer alongside the existing social row.
+
+**Exit criteria — verified with real tests** (`PageViewTrackingTest`, `ProductClickTrackingTest`, `AnalyticsScriptsTest`, `DashboardWidgetsTest`, plus a new `NewsletterTest` case): dashboard stats confirmed to reflect actual seeded `PageView`/`ProductClick`/`BusinessInquiry` data, and each of the three tracking scripts confirmed absent when unconfigured and present (independently and together) once an ID is set. 84 tests passing total.
 
 ---
 

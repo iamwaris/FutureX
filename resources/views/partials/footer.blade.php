@@ -7,6 +7,12 @@
         ['name' => 'instagram', 'label' => 'Instagram', 'href' => '#'],
         ['name' => 'tiktok', 'label' => 'TikTok', 'href' => '#'],
     ];
+
+    $supportLinks = [
+        ['name' => 'patreon', 'label' => 'Patreon', 'href' => '#'],
+        ['name' => 'kofi', 'label' => 'Ko-fi', 'href' => '#'],
+        ['name' => 'spotify', 'label' => 'Spotify', 'href' => '#'],
+    ];
 @endphp
 
 <footer class="border-t border-border">
@@ -25,16 +31,30 @@
                 <a href="{{ route('media-kit') }}" class="hover:text-text-primary">Media Kit</a>
             </div>
 
-            <div class="flex flex-wrap gap-x-6 gap-y-4">
-                @foreach ($socialLinks as $link)
-                    <a
-                        href="{{ $link['href'] }}"
-                        class="flex items-center gap-2 font-body text-sm text-text-secondary transition hover:text-text-primary"
-                    >
-                        <x-platform-badge :name="$link['name']" size="sm" />
-                        {{ $link['label'] }}
-                    </a>
-                @endforeach
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-wrap gap-x-6 gap-y-4">
+                    @foreach ($socialLinks as $link)
+                        <a
+                            href="{{ $link['href'] }}"
+                            class="flex items-center gap-2 font-body text-sm text-text-secondary transition hover:text-text-primary"
+                        >
+                            <x-platform-badge :name="$link['name']" size="sm" />
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
+                </div>
+
+                <div class="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-4">
+                    @foreach ($supportLinks as $link)
+                        <a
+                            href="{{ $link['href'] }}"
+                            class="flex items-center gap-2 font-body text-sm text-text-secondary transition hover:text-text-primary"
+                        >
+                            <x-platform-badge :name="$link['name']" size="sm" />
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
 

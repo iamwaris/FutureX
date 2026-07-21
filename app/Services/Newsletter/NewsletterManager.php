@@ -3,6 +3,7 @@
 namespace App\Services\Newsletter;
 
 use App\Models\NewsletterSetting;
+use App\Models\NewsletterSubscription;
 
 class NewsletterManager
 {
@@ -25,5 +26,13 @@ class NewsletterManager
         };
 
         $provider->subscribe($email);
+
+        // The provider (Beehiiv/Mailchimp) is the real subscriber list —
+        // this local copy exists only so the admin Newsletter Growth
+        // widget has something to chart without needing that provider's API.
+        NewsletterSubscription::create([
+            'email' => $email,
+            'provider' => $settings->provider,
+        ]);
     }
 }

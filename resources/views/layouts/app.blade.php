@@ -21,6 +21,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+
+    @include('partials.tracking-scripts')
 </head>
 <body class="bg-background text-text-primary font-body antialiased">
     <div class="grain-overlay"></div>
