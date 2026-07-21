@@ -12,22 +12,20 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 - Filament admin panel installed, first admin user created.
 - Tailwind v4, Alpine.js, GSAP installed.
 - Git initialized, remote `origin` set to `iamwaris/FutureX`.
-
-**Known blocker to clear before frontend build work:** local Node.js is v18.13.0; Vite 7 / `@tailwindcss/oxide` require Node ^20.19 or >=22.12. Upgrade Node before M2.
+- Node.js upgraded from v18.13.0 to v24.18.0 LTS (was blocking Vite 7 / `@tailwindcss/oxide`) — resolved.
 
 ---
 
-## M1 — Design Token Engine & Theme Foundation
+## M1 — Design Token Engine & Theme Foundation ✅ DONE
 
-The Theme Engine is the spine every other milestone depends on — build it before any visual page work, or later milestones will hardcode values that fight it later.
+- `theme_settings` table + `ThemeSetting` model (singleton row via `ThemeSetting::current()`): all 9 semantic colors, text colors, heading/body fonts, radius, shadow style, animation intensity, section spacing.
+- `ThemeService` renders tokens to cached CSS custom properties, served at `/theme.css` and linked from the base layout `<head>`; cache auto-flushes on save via model events.
+- Tailwind v4 `@theme inline` in `resources/css/app.css` maps `bg-primary`, `text-text-primary`, `font-heading` etc. to `var(--color-*)` — resolved at runtime, not baked in at build time.
+- Google Fonts `<link>` generated dynamically from the font tokens.
+- Filament **Theme Builder** page (`/admin/theme-builder`): color pickers, font selects, radius/shadow/animation/spacing controls, live-refreshing preview iframe of the homepage.
+- Placeholder homepage (`resources/views/home.blade.php`) proving the pipeline — will be replaced section-by-section in M2.
 
-- `theme_settings` table + model: primary/secondary/background/surface/card/border/success/warning/error colors, font families (heading/body), border radius, shadow style, animation intensity, section spacing scale, grid density.
-- Token → CSS custom properties pipeline: a cached service that renders `:root { --color-primary: ...; }` etc., injected once in the base layout `<head>`.
-- Tailwind config consumes the CSS variables (`bg-[var(--color-primary)]` or a mapped `colors: { primary: 'var(--color-primary)' }`), never hardcoded hex in components.
-- Dynamic Google Fonts loader driven by the font tokens.
-- Filament "Theme Builder" page: color pickers, font selects, radius/shadow/animation sliders, with a live preview iframe of the homepage.
-
-**Exit criteria:** changing any token in Filament visibly changes a test page with zero code edits.
+**Exit criteria — verified:** updating a token (tested via direct model update, simulating a Theme Builder save) flushed the cache and changed `/theme.css` output immediately with zero code changes.
 
 ---
 

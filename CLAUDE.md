@@ -15,7 +15,7 @@ Premium Creator Operating System — a Laravel + Filament platform that serves a
 - The `intl` and `zip` PHP extensions were disabled by default in `C:\xampp\php\php.ini` and were enabled to install Filament. This is a machine-wide XAMPP config change, not project-local.
 - **Composer is not installed globally.** `composer.phar` lives in the project root (gitignored) — run it as `php composer.phar <command>`.
 - **Database is a standalone MariaDB instance at `127.0.0.1:3306`, database `dbfuturex`** — this is a pre-existing server with other unrelated databases on it, not XAMPP's bundled MySQL (which has its own root password and was not used). Credentials are in `.env` only.
-- **Node.js is v18.13.0**, but Vite 7 and `@tailwindcss/oxide` require Node ^20.19 or >=22.12. `npm install` works with engine warnings; `npm run dev`/`build` should be considered unverified until Node is upgraded. Do this before starting M2 frontend work.
+- Node.js is v24.18.0 LTS (upgraded from v18.13.0, which couldn't run Vite 7 / `@tailwindcss/oxide` at all). `npm run build`/`dev` are confirmed working.
 - The project lives directly in `htdocs/FutureX`, so **do not rely on XAMPP's Apache** hitting it directly — Laravel needs the webserver docroot at `public/`, not the project root. Use `php artisan serve` for local dev (matches `APP_URL=http://localhost:8000` in `.env`), or configure an Apache VirtualHost pointing at `FutureX/public` if XAMPP Apache is preferred later.
 
 ## Conventions
