@@ -5,7 +5,27 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/*
+ * CreatorOS theme tokens. These are never hardcoded values — they resolve
+ * at runtime from the CSS custom properties injected by /theme.css (see
+ * App\Services\ThemeService), which reads from the admin-editable
+ * theme_settings row. "inline" tells Tailwind to keep the var() reference
+ * instead of inlining a static value at build time.
+ */
+@theme inline {
+    --color-primary: var(--color-primary);
+    --color-secondary: var(--color-secondary);
+    --color-background: var(--color-background);
+    --color-surface: var(--color-surface);
+    --color-card: var(--color-card);
+    --color-border: var(--color-border);
+    --color-success: var(--color-success);
+    --color-warning: var(--color-warning);
+    --color-error: var(--color-error);
+    --color-text-primary: var(--color-text-primary);
+    --color-text-secondary: var(--color-text-secondary);
+    --color-text-muted: var(--color-text-muted);
+
+    --font-heading: var(--font-heading);
+    --font-body: var(--font-body);
 }
