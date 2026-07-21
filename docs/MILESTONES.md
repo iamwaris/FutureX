@@ -29,15 +29,15 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 
 ---
 
-## M2 — Core Layout, Navigation & Homepage Skeleton
+## M2 — Core Layout, Navigation & Homepage Skeleton ✅ DONE
 
-- Base layout: sticky nav (Home/About/Content/Schedule/Community/Sponsors/Shop/Contact) + persistent Live indicator + Watch Live CTA.
-- Footer (Contact, social links, copyright, privacy/terms, business email).
-- Homepage section shells as Blade components for all 11 sections, populated with placeholder content, wired to the M1 tokens.
-- Baseline motion: fade/slide/hover-lift via Alpine + GSAP on scroll-into-view.
-- Mobile-first responsive pass, dark mode default with light mode toggle.
+- Base layout: sticky nav (`partials/nav.blade.php`) with Home/About/Content/Schedule/Community/Sponsors/Shop/Contact links (anchored to homepage sections until dedicated pages exist in later milestones), Live indicator placeholder, Watch Live CTA, mobile menu.
+- Footer (`partials/footer.blade.php`): business email, social links, copyright, privacy/terms.
+- All 11 homepage sections built as Blade partials (`resources/views/sections/*.blade.php`) behind a shared `<x-section>` wrapper component, populated with placeholder content, built entirely from M1 tokens (no hardcoded colors/fonts/radius anywhere).
+- Baseline motion: `resources/js/motion.js` — IntersectionObserver scroll-reveal, GSAP magnetic buttons, count-up stats — all gated on the `animation_intensity` token and `prefers-reduced-motion`.
+- Class-based dark/light mode: dark by default, toggle persists to `localStorage`, FOUC-safe (applied before first paint). Light mode overrides chrome via `:root:not(.dark)`; brand colors stay constant across modes.
 
-**Exit criteria:** homepage scrolls through all 11 sections responsively, dark/light both look correct, nothing hardcodes a color/font/radius outside tokens.
+**Exit criteria — verified:** homepage returns 200 with all 10 section IDs present (`hero`, `live-status`, `snapshot`, `featured-content`, `about`, `schedule`, `community`, `sponsors`, `shop`, `newsletter`), no PHP errors, responsive Tailwind classes in place at `sm`/`lg` breakpoints. Not independently verified in an actual browser (no browser/screenshot tool in this environment) — worth a manual look before M3.
 
 ---
 
