@@ -29,3 +29,47 @@
     --font-heading: var(--font-heading);
     --font-body: var(--font-body);
 }
+
+/*
+ * Light mode overrides the chrome (background/surface/card/border/text)
+ * with a fixed neutral scale. Brand tokens (primary/secondary/success/
+ * warning/error) stay admin-controlled in both modes since they're part
+ * of the creator's identity, not UI chrome. Dark mode (the ".dark" class
+ * on <html>, default) uses the full admin-edited palette from /theme.css.
+ * Specificity of :root:not(.dark) beats plain :root regardless of link
+ * order, so this is safe next to the inline theme.css variables.
+ */
+:root:not(.dark) {
+    --color-background: #ffffff;
+    --color-surface: #f4f4f5;
+    --color-card: #ffffff;
+    --color-border: #e4e4e7;
+    --color-text-primary: #18181b;
+    --color-text-secondary: #52525b;
+    --color-text-muted: #a1a1aa;
+}
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity calc(0.6s * var(--motion-scale, 1)) ease-out,
+        transform calc(0.6s * var(--motion-scale, 1)) ease-out;
+}
+
+[data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-animate] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+[x-cloak] {
+    display: none !important;
+}
