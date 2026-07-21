@@ -57,14 +57,13 @@ Stack: Laravel 12 + Filament 3 (admin), MariaDB, Tailwind CSS v4, Alpine.js + GS
 
 ---
 
-## M4 — Live Status & Streaming Platform Integrations
+## M4 — Live Status & Streaming Platform Integrations ✅ DONE (pending real credentials)
 
-- Service classes: `TwitchService`, `KickService`, `YouTubeLiveService` behind a common `LiveStatusProvider` interface.
-- Scheduled job polls active platform(s) every 1–2 min, caches LIVE/OFFLINE + title/game/viewers/duration.
-- Frontend Live Status section reflects cache via Livewire polling.
-- Live Mode: hero/banner auto-swaps to "LIVE NOW" state driven by the same cache.
+- `TwitchService`, `KickService`, `YouTubeLiveService` behind a common `LiveStatusProvider` interface, each built against the real documented API shape (Twitch Helix + app access token, Kick public API v1 + OAuth2 client_credentials, YouTube Data API v3 live search). `StreamingCredential` model + Filament resource (`/admin/streaming-credentials`, under an "Integrations" nav group) stores per-platform credentials, `client_secret`/`cached_access_token` encrypted at rest.
+- `LiveStatusManager` tries each configured provider, caches whichever is live (or an explicit offline status) for 5 minutes. `live-status:poll` artisan command scheduled every 2 minutes in `routes/console.php`.
+- Three Livewire components (`LiveStatusBanner`, `NavLiveIndicator`, `HeroLiveStatus`) read the cache and `wire:poll.30s` — the Live Status section, nav indicator, and Hero's stream-preview mockup all update without a page reload once real credentials are entered.
 
-**Exit criteria:** starting a real (or sandboxed) Twitch stream flips the site to Live Mode within the poll interval without a page reload.
+**Exit criteria — partially verified:** with no real API credentials, the actual "start a Twitch stream and watch it flip live" test isn't possible yet. What's verified instead, with real automated tests (`LiveStatusTest`, `LiveStatusComponentsTest`): each service correctly parses a live/offline API response via `Http::fake()`, the manager correctly skips unconfigured providers and falls back to a cached offline status, and all three Livewire components correctly render both LIVE and OFFLINE states from the cache. Re-verify against a real (or sandboxed) stream once credentials are added in Filament Integrations.
 
 ---
 

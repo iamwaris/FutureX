@@ -9,9 +9,6 @@
         ['label' => 'Shop', 'href' => '#shop'],
         ['label' => 'Contact', 'href' => 'mailto:business@example.com'],
     ];
-
-    // Placeholder until M4 wires real Twitch/Kick/YouTube live status.
-    $isLive = false;
 @endphp
 
 <header
@@ -37,15 +34,7 @@
         </ul>
 
         <div class="hidden items-center gap-4 lg:flex">
-            <div class="flex items-center gap-2 text-sm text-text-secondary">
-                <span class="relative flex h-2.5 w-2.5">
-                    @if ($isLive)
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-error opacity-75"></span>
-                    @endif
-                    <span class="relative inline-flex h-2.5 w-2.5 rounded-full {{ $isLive ? 'bg-error' : 'bg-text-muted' }}"></span>
-                </span>
-                {{ $isLive ? 'LIVE' : 'OFFLINE' }}
-            </div>
+            @livewire('nav-live-indicator')
 
             @include('partials.theme-toggle')
 

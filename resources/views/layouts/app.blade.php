@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ route('theme.css') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="bg-background text-text-primary font-body antialiased">
     <div class="grain-overlay"></div>
@@ -35,5 +36,7 @@
     </main>
 
     @include('partials.footer')
+
+    @livewireScripts
 </body>
 </html>

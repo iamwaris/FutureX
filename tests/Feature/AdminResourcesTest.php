@@ -10,7 +10,6 @@ class AdminResourcesTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /**
      * @dataProvider contentResourcePaths
      */
@@ -30,6 +29,7 @@ class AdminResourcesTest extends TestCase
             ['events'],
             ['faq-items'],
             ['posts'],
+            ['streaming-credentials'],
         ];
     }
 
