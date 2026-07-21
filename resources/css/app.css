@@ -103,10 +103,10 @@
 }
 
 .cos-card:hover {
-    border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    border-color: color-mix(in srgb, var(--card-glow, var(--color-primary)) 45%, transparent);
     box-shadow:
         var(--shadow-elevation),
-        0 0 40px -14px var(--color-primary);
+        0 0 40px -14px var(--card-glow, var(--color-primary));
 }
 
 .cos-chip {
@@ -151,4 +151,11 @@
     .cos-marquee-track {
         animation: none;
     }
+}
+
+.schedule-today {
+    border-color: var(--color-primary) !important;
+    box-shadow:
+        var(--shadow-elevation),
+        0 0 0 1px var(--color-primary);
 }
