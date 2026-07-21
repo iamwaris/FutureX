@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SnapshotStatSeeder::class);
         $this->call(SponsorSeeder::class);
         $this->call(MediaKitSeeder::class);
+        $this->call(CreatorModeSeeder::class);
     }
 }

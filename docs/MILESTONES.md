@@ -116,13 +116,13 @@ Highest monetization priority — brands should be able to self-serve everything
 
 ---
 
-## M9 — Creator Modes & Theme Presets
+## M9 — Creator Modes & Theme Presets ✅ DONE
 
-- Named token presets (save/load/duplicate/reset) building on M1's theme engine.
-- Mode switcher in Filament: Sponsor Mode, Event Mode, Charity Mode, Seasonal Themes — each mode = a token preset + a `page_sections` configuration swap, one click to activate.
-- Charity Mode adds a donation campaign banner/section.
+- `ThemePreset` model (mirrors `ThemeSetting`'s token columns exactly via a shared `ThemeTokens::FIELDS` list) + Filament resource: save the live theme as a new named preset, apply/duplicate/edit/delete any preset.
+- `CreatorMode` model (key, label, `theme_preset_id`, `section_overrides` JSON) + a Filament **Creator Modes** page — one-click Activate per mode, shows which is currently active, one "Restore Default" button. Seeded Sponsor/Event/Charity modes, each with its own preset and section-layout tweaks (Sponsor Mode surfaces Sponsors/Snapshot and hides Shop; Event Mode promotes Schedule; Charity Mode enables a new `charity-banner` homepage section with a donation-progress bar).
+- `ModeManager` handles activation with an **exact-restore** mechanism: before the first mode activation, it snapshots the live theme + every `page_sections` row into a `ModeSnapshot` singleton; deactivating restores those exact values and deletes any section a mode had added (so Charity Mode's banner doesn't linger, just disabled, after switching back). Switching directly between two modes deactivates (true restore) before activating the next, so snapshots never stack on top of each other.
 
-**Exit criteria:** toggling Event Mode in Filament changes the homepage's visual theme and section priority live, and toggling back restores the previous state exactly.
+**Exit criteria — verified two ways**: automated tests (`ModeManagerTest`, 5 cases covering apply/restore/banner-cleanup/direct-mode-switching/no-op-deactivate) and a live run against the dev database — activated Charity Mode, confirmed `/theme.css` and the homepage both reflected the new color and banner, then deactivated and confirmed the primary color and section list were back to exactly their prior values. 69 tests passing total.
 
 ---
 

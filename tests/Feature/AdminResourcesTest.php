@@ -35,6 +35,7 @@ class AdminResourcesTest extends TestCase
             ['business-inquiries'],
             ['shop-credentials'],
             ['products'],
+            ['theme-presets'],
         ];
     }
 
@@ -55,6 +56,7 @@ class AdminResourcesTest extends TestCase
             ['snapshot-stats-settings'],
             ['newsletter-settings-page'],
             ['media-kit-settings'],
+            ['mode-switcher'],
         ];
     }
 }

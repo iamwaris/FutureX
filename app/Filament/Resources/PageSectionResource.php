@@ -41,6 +41,7 @@ class PageSectionResource extends Resource
         'sponsors' => 'Sponsors',
         'shop' => 'Shop',
         'newsletter' => 'Newsletter',
+        'charity-banner' => 'Charity Banner',
     ];
 
     public static function form(Form $form): Form

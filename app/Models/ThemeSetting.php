@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\ThemeTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
@@ -9,26 +10,7 @@ class ThemeSetting extends Model
 {
     public const CACHE_KEY = 'theme:css-vars';
 
-    protected $fillable = [
-        'primary_color',
-        'secondary_color',
-        'background_color',
-        'surface_color',
-        'card_color',
-        'border_color',
-        'success_color',
-        'warning_color',
-        'error_color',
-        'text_primary_color',
-        'text_secondary_color',
-        'text_muted_color',
-        'font_heading',
-        'font_body',
-        'radius',
-        'shadow_style',
-        'animation_intensity',
-        'section_spacing',
-    ];
+    protected $fillable = ThemeTokens::FIELDS;
 
     protected function casts(): array
     {
