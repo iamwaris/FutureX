@@ -7,7 +7,7 @@
         ['label' => 'Community', 'href' => '#community'],
         ['label' => 'Sponsors', 'href' => '#sponsors'],
         ['label' => 'Shop', 'href' => '#shop'],
-        ['label' => 'Contact', 'href' => '#newsletter'],
+        ['label' => 'Contact', 'href' => 'mailto:business@example.com'],
     ];
 
     // Placeholder until M4 wires real Twitch/Kick/YouTube live status.

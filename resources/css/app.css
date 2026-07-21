@@ -73,3 +73,47 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* Subtle tactile grain — the difference between "flat" and "premium". */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/*
+ * Shared elevated-surface treatment: a softer border than solid
+ * border-border, plus a brand-colored glow on hover instead of a flat
+ * translate. Used anywhere a "card" appears so the whole site reads as
+ * one system instead of every box looking hand-placed.
+ */
+.cos-card {
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-elevation);
+    transition:
+        border-color calc(0.3s * var(--motion-scale, 1)) ease,
+        box-shadow calc(0.3s * var(--motion-scale, 1)) ease,
+        transform calc(0.3s * var(--motion-scale, 1)) ease;
+}
+
+.cos-card:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    box-shadow:
+        var(--shadow-elevation),
+        0 0 40px -14px var(--color-primary);
+}
+
+.cos-chip {
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    transition: border-color calc(0.3s * var(--motion-scale, 1)) ease;
+}
+
+.cos-chip:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+}

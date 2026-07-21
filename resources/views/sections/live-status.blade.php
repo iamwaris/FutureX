@@ -12,10 +12,7 @@
 @endphp
 
 <x-section id="live-status">
-    <div
-        class="flex flex-col gap-8 border border-border bg-card p-8 lg:flex-row lg:items-center lg:justify-between"
-        style="border-radius: var(--radius-base); box-shadow: var(--shadow-elevation);"
-    >
+    <div class="cos-card flex flex-col gap-8 p-8 lg:flex-row lg:items-center lg:justify-between">
         <div class="flex items-start gap-4">
             <x-platform-badge name="twitch" />
 

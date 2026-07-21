@@ -8,8 +8,11 @@
 @endphp
 
 <x-section id="shop">
-    <div class="flex items-baseline justify-between">
-        <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Shop</h2>
+    <div class="flex items-end justify-between">
+        <div>
+            <x-eyebrow icon="tag">Merch</x-eyebrow>
+            <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Shop</h2>
+        </div>
         <a href="#" class="flex items-center gap-1 font-body text-sm text-text-secondary hover:text-text-primary">
             View all <x-ui-icon name="arrow-right" class="h-4 w-4" />
         </a>
@@ -17,10 +20,7 @@
 
     <div class="mt-10 grid grid-cols-2 gap-6 lg:grid-cols-4">
         @foreach ($products as $product)
-            <div
-                class="group overflow-hidden border border-border bg-card"
-                style="border-radius: var(--radius-base); box-shadow: var(--shadow-elevation);"
-            >
+            <div class="cos-card group overflow-hidden">
                 <div class="relative flex aspect-square items-center justify-center bg-surface">
                     <x-ui-icon
                         :name="$product['icon']"

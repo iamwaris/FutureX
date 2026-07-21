@@ -10,14 +10,14 @@
 @endphp
 
 <x-section id="community">
+    <x-eyebrow icon="users">Stay Connected</x-eyebrow>
     <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Community Hub</h2>
 
     <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @foreach ($platforms as $platform)
             <a
                 href="#"
-                class="flex items-center justify-between border border-border bg-card p-6 transition hover:-translate-y-0.5"
-                style="border-radius: var(--radius-base); box-shadow: var(--shadow-elevation);"
+                class="cos-card flex items-center justify-between p-6 transition hover:-translate-y-0.5"
             >
                 <div class="flex items-center gap-4">
                     <x-platform-badge :name="$platform['name']" />

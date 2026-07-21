@@ -10,6 +10,7 @@
 <x-section id="about">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div>
+            <x-eyebrow icon="camera">Our Journey</x-eyebrow>
             <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">The Story So Far</h2>
             <p class="mt-6 font-body text-lg leading-relaxed text-text-secondary">
                 What started as a way to unwind after work turned into a full-time career built on

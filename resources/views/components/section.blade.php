@@ -1,4 +1,8 @@
-@props(['id' => null, 'last' => false])
+@props(['id' => null, 'last' => false, 'band' => false])
+
+@if ($band)
+    <div style="background: var(--color-surface);">
+@endif
 
 <section
     @if ($id) id="{{ $id }}" @endif
@@ -8,3 +12,7 @@
 >
     {{ $slot }}
 </section>
+
+@if ($band)
+    </div>
+@endif

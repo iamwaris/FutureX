@@ -22,9 +22,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-background text-text-primary font-body antialiased">
+    <div class="grain-overlay"></div>
+
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-primary focus:px-4 focus:py-2 focus:text-white" style="border-radius: var(--radius-base);">
+        Skip to content
+    </a>
+
     @include('partials.nav')
 
-    @yield('content')
+    <main id="main">
+        @yield('content')
+    </main>
 
     @include('partials.footer')
 </body>

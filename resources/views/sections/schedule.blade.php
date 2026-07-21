@@ -11,8 +11,11 @@
 @endphp
 
 <x-section id="schedule">
-    <div class="flex items-baseline justify-between">
-        <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Stream Schedule</h2>
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+            <x-eyebrow icon="calendar">This Week</x-eyebrow>
+            <h2 class="font-heading text-3xl font-bold text-text-primary sm:text-4xl">Stream Schedule</h2>
+        </div>
         <p class="font-body text-sm text-text-secondary">Next stream in <span class="text-text-primary">14h 22m</span></p>
     </div>
 
